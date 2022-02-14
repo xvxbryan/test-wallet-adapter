@@ -35,8 +35,6 @@ export const SendTransactionComponent = () => {
             // )
         );
 
-        
-
         const blockHash = await connection.getRecentBlockhash()
         tx.feePayer = publicKey
         tx.recentBlockhash = await blockHash.blockhash
@@ -46,29 +44,6 @@ export const SendTransactionComponent = () => {
         console.log(signature)
 
         await connection.confirmTransaction(signature, 'processed');
-
-        // const signed = await provider.signTransaction(tx);
-        // console.log(signed, " signedsignedsigned")
-        // signed.serialize()
-
-        // const signature = await sendTransaction(transaction, connection);
-
-        // await connection.confirmTransaction(signature, 'processed');
-
-
-        // if (!publicKey) throw new WalletNotConnectedError();
-
-        // const transaction = new Transaction().add(
-        //     SystemProgram.transfer({
-        //         fromPubkey: publicKey,
-        //         toPubkey: Keypair.generate().publicKey,
-        //         lamports: 1,
-        //     })
-        // );
-
-        // const signature = await sendTransaction(transaction, connection);
-
-        // await connection.confirmTransaction(signature, 'processed');
     }, [publicKey, sendTransaction, connection]);
 
     return (
