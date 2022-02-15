@@ -20,7 +20,8 @@ import {
     WalletDisconnectButton,
     WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
-import { SendTransactionComponent } from './SendTransaction';
+import { CreateAccount } from './CreateAccount';
+import { CreateAssociatedAccount } from './CreateAssociatedAccount';
 
 export default function Setup() {
     // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -42,61 +43,6 @@ export default function Setup() {
         [network]
     );
 
-    const { connection } = useConnection();
-    const { publicKey, sendTransaction } = useWallet();
-
-    const onClick = useCallback(async () => {
-        console.log(publicKey)
-
-        // const NETWORK = clusterApiUrl("devnet");
-        // const connection = new Connection(NETWORK);
-        // let provider = wallets[0]._publicKey;
-        // console.log(provider)
-
-        // const tokenAccount = Keypair.generate();
-        // console.log(`token account: ${tokenAccount.publicKey.toBase58()}`);
-        // let tx = new Transaction().add(
-        // // create token account
-        //     SystemProgram.createAccount({
-        //         fromPubkey: provider.publicKey,
-        //         newAccountPubkey: tokenAccount.publicKey,
-        //         space: AccountLayout.span,
-        //         lamports: await Token.getMinBalanceRentForExemptAccount(connection),
-        //         programId: TOKEN_PROGRAM_ID,
-        //     }),
-        //     // init mint account
-        //     // Token.createInitAccountInstruction(
-        //     //     TOKEN_PROGRAM_ID, // always TOKEN_PROGRAM_ID
-        //     //     mintPubkey, // mint
-        //     //     tokenAccount.publicKey, // token account
-        //     //     alice.publicKey // owner of token account
-        //     // )
-        // );
-
-        // console.log(tx)
-
-        // const blockHash = await connection.getRecentBlockhash()
-        // tx.feePayer = provider
-        // tx.recentBlockhash = await blockHash.blockhash
-        // const signed = await provider.signTransaction(tx);
-        // console.log(signed, " signedsignedsigned")
-        // signed.serialize()
-        
-        // if (!publicKey) throw new WalletNotConnectedError();
-
-        // const transaction = new Transaction().add(
-        //     SystemProgram.transfer({
-        //         fromPubkey: publicKey,
-        //         toPubkey: Keypair.generate().publicKey,
-        //         lamports: 1,
-        //     })
-        // );
-
-        // const signature = await sendTransaction(transaction, connection);
-
-        // await connection.confirmTransaction(signature, 'processed');
-    }, [publicKey, sendTransaction, connection]);
-
     return (
         <div>
             <ConnectionProvider endpoint={endpoint}>
@@ -108,7 +54,10 @@ export default function Setup() {
                         { /* Your app's components go here, nested within the context providers. */ }
                         <br/>
                         <br/>
-                        <SendTransactionComponent/>
+                        <CreateAccount/>
+                        <br/>
+                        <br/>
+                        <CreateAssociatedAccount/>
                     </WalletModalProvider>
                 </WalletProvider>
             </ConnectionProvider>
